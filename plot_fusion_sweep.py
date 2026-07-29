@@ -7,6 +7,13 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")
+matplotlib.rcParams.update(
+    {
+        "font.family": "cmr10",
+        "mathtext.fontset": "cm",
+        "axes.formatter.use_mathtext": True,
+    }
+)
 import matplotlib.pyplot as plt
 
 
@@ -52,7 +59,7 @@ def main():
         ha="center",
         va="bottom",
         fontsize=10,
-        fontweight="bold",
+        fontfamily="cmb10",
     )
     fig.savefig(args.output, dpi=300, bbox_inches="tight")
 
