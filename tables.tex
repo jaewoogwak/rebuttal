@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{graphicx}
 \usepackage[T1]{fontenc}
 \renewcommand{\arraystretch}{1.18}
 \setlength{\tabcolsep}{5pt}
@@ -17,11 +18,11 @@
 \small
 \begin{tabular}{l l r r r r}
 \toprule
-Dataset & Boundary configuration & Avg. segments & Train max & Val max & Base Rsum \\
+Dataset & Boundary configuration & Avg. segments & Train max & Val max & Base SumR \\
 \midrule
 ActivityNet & cosine; prom. $-1.0$; dist. 1; smooth 1 & 36 & 212 & 224 & 183.9 \\
 TVR & cosine; prom. $0.2$; dist. 2; smooth 1 & 21 & 75 & 52 & 232.6 \\
-QVHighlights & cosine; prom. $1.3$; dist. 2; smooth 3; split-only & 72 & 143 & 139 & 243.5 \\
+Qvhighlights & cosine; prom. $1.3$; dist. 2; smooth 3; length regularization & 72 & 143 & 139 & 243.5 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -33,44 +34,48 @@ QVHighlights & cosine; prom. $1.3$; dist. 2; smooth 3; split-only & 72 & 143 & 1
 \toprule
 Hyperparameter & U1 & U2 \\
 \midrule
-Base window & \multicolumn{2}{c}{8} \\
 Multi-scale windows & \multicolumn{2}{c}{$\{2,4,8,16\}$} \\
 Scale weights & \multicolumn{2}{c}{$\{0.4,0.3,0.2,0.1\}$} \\
 Peak selection / normalization & \multicolumn{2}{c}{prominence / MAD} \\
 MAD prominence & 0.4 & 0.2 \\
 Minimum distance / smoothing & \multicolumn{2}{c}{1 / 1} \\
-Postprocessing & \multicolumn{2}{c}{none} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \begin{center}
 \small
-\begin{tabular}{l r r r}
+\begin{tabular}{l l r r r r r r}
 \toprule
-Dataset & Base Rsum & U1 Rsum & U2 Rsum \\
+Dataset & Setting & Avg. segments & R@1 & R@5 & R@10 & R@100 & SumR \\
 \midrule
-ActivityNet & 183.9 & 183.1 & 183.7 \\
-TVR & 232.6 & 232.8 & 233.1 \\
-QVHighlights & 243.5 & 242.4 & 245.5 \\
+ActivityNet & Base & 36 & 15.0 & 36.4 & 49.8 & 82.8 & 183.9 \\
+ActivityNet & U1 & 18 & 14.5 & 36.2 & 49.3 & 83.0 & 183.1 \\
+ActivityNet & U2 & 19 & 14.5 & 36.6 & 49.7 & 82.9 & 183.7 \\
+TVR & Base & 21 & 26.0 & 51.8 & 62.5 & 92.3 & 232.6 \\
+TVR & U1 & 19 & 26.4 & 51.7 & 62.7 & 92.0 & 232.8 \\
+TVR & U2 & 21 & 26.6 & 51.4 & 62.8 & 92.3 & 233.1 \\
+Qvhighlights & Base & 72 & 26.5 & 54.9 & 66.8 & 95.3 & 243.5 \\
+Qvhighlights & U1 & 139 & 24.5 & 54.3 & 67.0 & 96.7 & 242.4 \\
+Qvhighlights & U2 & 149 & 26.8 & 54.5 & 67.7 & 96.5 & 245.5 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\section*{3. Intra-Query Segment Separation and QVH Length Regularization}
+\section*{3. Intra-Query Segment Separation and Qvhighlights Length Regularization}
 \begin{center}
 \small
 \begin{tabular}{l l r r r r r}
 \toprule
-Dataset & Setting & R@1 & R@5 & R@10 & R@100 & Rsum \\
+Dataset & Setting & R@1 & R@5 & R@10 & R@100 & SumR \\
 \midrule
 ActivityNet & Hard & 15.0 & 36.4 & 49.8 & 82.8 & 183.9 \\
 ActivityNet & Soft & 14.5 & 36.3 & 49.6 & 83.2 & 183.6 \\
 TVR & Soft & 26.0 & 51.8 & 62.5 & 92.3 & 232.6 \\
 TVR & Hard & 26.9 & 51.7 & 62.3 & 92.0 & 233.0 \\
-QVHighlights & Soft & 26.5 & 54.9 & 66.8 & 95.3 & 243.5 \\
-QVHighlights & Hard & 24.2 & 53.4 & 65.5 & 96.5 & 239.6 \\
-QVHighlights & no split-only length regularization & 25.8 & 55.2 & 66.0 & 96.1 & 243.0 \\
+Qvhighlights & Soft & 26.5 & 54.9 & 66.8 & 95.3 & 243.5 \\
+Qvhighlights & Hard & 24.2 & 53.4 & 65.5 & 96.5 & 239.6 \\
+Qvhighlights & no length regularization & 25.8 & 55.2 & 66.0 & 96.1 & 243.0 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -81,7 +86,7 @@ QVHighlights & no split-only length regularization & 25.8 & 55.2 & 66.0 & 96.1 &
 \small
 \begin{tabular}{c r r r}
 \toprule
-Segment:Frame & ActivityNet Rsum & TVR Rsum & QVHighlights Rsum \\
+Segment:Frame & ActivityNet SumR & TVR SumR & Qvhighlights SumR \\
 \midrule
 0.60:0.40 & 181.8 & 228.6 & 238.3 \\
 0.65:0.35 & 182.7 & 229.9 & 239.9 \\
@@ -93,6 +98,9 @@ Segment:Frame & ActivityNet Rsum & TVR Rsum & QVHighlights Rsum \\
 \bottomrule
 \end{tabular}
 \end{center}
+\begin{center}
+\includegraphics[width=0.65\textwidth]{rendered/fusion_sweep_sumr.png}
+\end{center}
 \section*{5. Boundary Construction Wall-Clock Time}
 \begin{center}
 \small
@@ -100,9 +108,9 @@ Segment:Frame & ActivityNet Rsum & TVR Rsum & QVHighlights Rsum \\
 \toprule
 Dataset & Wall-clock time (s) \\
 \midrule
-ACT36 & 29.981 \\
-TVR21 & 53.653 \\
-QVH72 & 47.766 \\
+ActivityNet & 29.981 \\
+TVR & 53.653 \\
+Qvhighlights & 47.766 \\
 \bottomrule
 \end{tabular}
 \end{center}

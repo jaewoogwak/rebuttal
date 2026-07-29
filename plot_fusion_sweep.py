@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the seed-3495 segment/frame fusion Rsum sweep."""
+"""Render the seed-3495 segment/frame fusion SumR sweep."""
 
 import argparse
 from pathlib import Path
@@ -14,9 +14,9 @@ WEIGHTS = [0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
 RESULTS = {
     "ActivityNet": [181.8, 182.7, 183.3, 183.9, 184.7, 183.9, 184.5],
     "TVR": [228.6, 229.9, 231.2, 232.1, 232.6, 232.6, 232.8],
-    "QVHighlights": [238.3, 239.9, 241.4, 241.5, 243.5, 243.3, 243.2],
+    "Qvhighlights": [238.3, 239.9, 241.4, 241.5, 243.5, 243.3, 243.2],
 }
-COLORS = {"ActivityNet": "#1f77b4", "TVR": "#d62728", "QVHighlights": "#2ca02c"}
+COLORS = {"ActivityNet": "#1f77b4", "TVR": "#d62728", "Qvhighlights": "#2ca02c"}
 
 
 def main():
@@ -38,7 +38,7 @@ def main():
         )
 
     ax.set_xlabel("Segment branch weight")
-    ax.set_ylabel("Rsum")
+    ax.set_ylabel("SumR")
     ax.set_xticks(WEIGHTS)
     ax.set_xlim(0.59, 0.91)
     ax.grid(axis="y", color="#d9d9d9", linewidth=0.8)
