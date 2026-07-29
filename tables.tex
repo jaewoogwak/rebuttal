@@ -101,28 +101,7 @@ Segment:Frame & ACT Rsum & TVR Rsum & QVH Rsum \\
 \end{center}
 \noindent QVH evaluated at the ACT/TVR fusion coefficient $0.85:0.15$ obtains $R@1/R@5/R@10/R@100=26.3/53.7/66.8/96.5$ and $Rsum=243.3$.
 
-\section*{5. QVH Pseudo-Supervision Partition Ablation (Seed 3495)}
-\begin{center}
-\small
-\begin{tabular}{l l r r r r r}
-\toprule
-Partition & Objective & R@1 & R@5 & R@10 & R@100 & Rsum \\
-\midrule
-SPOT & hard MIL & 21.5 & 48.0 & 61.1 & 93.9 & 224.5 \\
-SPOT & pseudo Soft MIL & 1.6 & 6.3 & 11.7 & 55.7 & 75.4 \\
-SPOT & pseudo Soft MIL + IQS & 22.8 & 48.8 & 62.7 & 95.2 & 229.4 \\
-Uniform matched & hard MIL & 21.7 & 49.9 & 62.6 & 95.9 & 230.1 \\
-Uniform matched & pseudo Soft MIL & 24.4 & 51.0 & 64.1 & 95.2 & 234.7 \\
-Uniform matched & pseudo Soft MIL + IQS & 23.4 & 49.9 & 64.1 & 95.9 & 233.2 \\
-Uniform-32 & hard MIL & 21.5 & 48.1 & 60.6 & 94.3 & 224.5 \\
-Uniform-32 & pseudo Soft MIL & 24.5 & 50.8 & 64.5 & 95.4 & 235.1 \\
-Uniform-32 & pseudo Soft MIL + IQS & 24.1 & 51.9 & 63.7 & 94.9 & 234.5 \\
-\bottomrule
-\end{tabular}
-\end{center}
-\noindent \textbf{Caveat.} The SPOT + pseudo Soft MIL-only run is anomalous relative to the remaining pseudo results and the earlier seed-9527 run ($Rsum=231.7$); it should be rerun before submission.
-
-\section*{6. Earlier GT-Timestamp Partition Ablation (Seed 9527)}
+\section*{5. Earlier GT-Timestamp Partition Ablation (Seed 9527)}
 \begin{center}
 \small
 \begin{tabular}{l l r r r r r}
@@ -139,7 +118,7 @@ Uniform matched & Soft MIL + IQS & 2.4 & 7.9 & 12.5 & 54.1 & 76.9 \\
 \end{tabular}
 \end{center}
 
-\section*{7. Boundary Construction Wall-Clock Time}
+\section*{6. Boundary Construction Wall-Clock Time}
 \begin{center}
 \small
 \begin{tabular}{l r}
