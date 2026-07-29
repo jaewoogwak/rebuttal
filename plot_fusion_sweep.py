@@ -25,7 +25,7 @@ def main():
     args = parser.parse_args()
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    fig, ax = plt.subplots(figsize=(7.4, 4.4), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(7.4, 4.7))
     for dataset, values in RESULTS.items():
         ax.plot(
             WEIGHTS,
@@ -44,6 +44,16 @@ def main():
     ax.grid(axis="y", color="#d9d9d9", linewidth=0.8)
     ax.spines[["top", "right"]].set_visible(False)
     ax.legend(frameon=False, ncol=3, loc="lower right")
+    fig.subplots_adjust(bottom=0.19)
+    fig.text(
+        0.5,
+        0.035,
+        "Figure 1. SumR across segment/frame fusion weights.",
+        ha="center",
+        va="bottom",
+        fontsize=10,
+        fontweight="bold",
+    )
     fig.savefig(args.output, dpi=300, bbox_inches="tight")
 
 
