@@ -15,3 +15,5 @@
 ![Table 7](rendered/table-7.png)
 
 ![Table 8](rendered/table-8.png)
+
+![Table 9](rendered/table-9.png)
