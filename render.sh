@@ -11,7 +11,7 @@ mkdir -p "${BUILD_DIR}" "${RENDER_DIR}"
 
 "${PYTHON_BIN}" "${ROOT_DIR}/plot_fusion_sweep.py" --output "${RENDER_DIR}/figure-1-sumr.png"
 cd "${ROOT_DIR}"
-for index in 0 1 2 3 4 5; do
+for index in 0 1 2 3 4 5 6 7; do
   table=$((index + 1))
   pdflatex -interaction=nonstopmode -halt-on-error \
     -jobname "table-${table}" -output-directory "${BUILD_DIR}" \

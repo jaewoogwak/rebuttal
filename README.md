@@ -11,3 +11,7 @@
 ![Figure 1](rendered/figure-1-sumr.png)
 
 ![Table 6](rendered/table-6.png)
+
+![Table 7](rendered/table-7.png)
+
+![Table 8](rendered/table-8.png)
