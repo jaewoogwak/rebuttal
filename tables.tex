@@ -7,12 +7,12 @@
 \usepackage[T1]{fontenc}
 \renewcommand{\arraystretch}{1.18}
 \setlength{\tabcolsep}{5pt}
-\newcommand{\tablecaption}[1]{\par\noindent\makebox[\textwidth][c]{\footnotesize\textbf{Table #1.}}\par\vspace{-7pt}}
-\newcommand{\figurecaption}[1]{\par\noindent\makebox[\textwidth][c]{\footnotesize\textbf{Figure #1.}}\par\vspace{-7pt}}
+\newcommand{\tablecaption}[2]{\par\noindent\makebox[\textwidth][c]{\footnotesize\textbf{Table #1.} #2}\par\vspace{-7pt}}
+\newcommand{\figurecaption}[2]{\par\noindent\makebox[\textwidth][c]{\footnotesize\textbf{Figure #1.} #2}\par\vspace{-7pt}}
 
 \begin{document}
 
-\tablecaption{1}
+\tablecaption{1}{Dataset-specific base configurations and boundary statistics.}
 \begin{center}
 \small
 \begin{tabular}{l l r r r r}
@@ -26,7 +26,7 @@ Qvhighlights & cosine; prom. $1.3$; dist. 2; smooth 3; length regularization & 7
 \end{tabular}
 \end{center}
 
-\tablecaption{2}
+\tablecaption{2}{Shared boundary hyperparameters.}
 \begin{center}
 \small
 \begin{tabular}{l c c}
@@ -42,7 +42,7 @@ Minimum distance / smoothing & \multicolumn{2}{c}{1 / 1} \\
 \end{tabular}
 \end{center}
 
-\tablecaption{3}
+\tablecaption{3}{Retrieval performance for base, U1, and U2 boundaries.}
 \begin{center}
 \small
 \begin{tabular}{l l r r r r r r}
@@ -62,7 +62,7 @@ Qvhighlights & U2 & 149 & 26.8 & 54.5 & 67.7 & 96.5 & 245.5 \\
 \end{tabular}
 \end{center}
 
-\tablecaption{4}
+\tablecaption{4}{Effects of IQS aggregation and Qvhighlights length regularization.}
 \begin{center}
 \small
 \begin{tabular}{l l r r r r r}
@@ -81,7 +81,7 @@ Qvhighlights & no length regularization & 25.8 & 55.2 & 66.0 & 96.1 & 243.0 \\
 \end{center}
 
 \newpage
-\tablecaption{5}
+\tablecaption{5}{SumR sensitivity to segment/frame fusion weights.}
 \begin{center}
 \small
 \begin{tabular}{c r r r}
@@ -101,9 +101,9 @@ Segment:Frame & ActivityNet SumR & TVR SumR & Qvhighlights SumR \\
 \begin{center}
 \includegraphics[width=0.65\textwidth]{rendered/fusion_sweep_sumr.png}
 \end{center}
-\figurecaption{1}
+\figurecaption{1}{SumR across segment/frame fusion weights.}
 \vspace{10pt}
-\tablecaption{6}
+\tablecaption{6}{Boundary construction time (s).}
 \begin{center}
 \small
 \begin{tabular}{l r}
