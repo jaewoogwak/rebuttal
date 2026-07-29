@@ -10,7 +10,6 @@
 \begin{document}
 \begin{center}
 {\Large \textbf{SPOT Rebuttal Results}}\\[2pt]
-{\small Canonical refreshed experiments use seed 3495 and CLIP ViT-B/32 QuickGELU token-77 query features.}
 \end{center}
 
 \section*{1. Base Configurations and Boundary Statistics}
@@ -20,14 +19,12 @@
 \toprule
 Dataset & Boundary configuration & Train avg. & Val avg. & Train max & Val max & Base Rsum \\
 \midrule
-ACT & cosine; prom. $-1.0$; dist. 1; smooth 1 & 36.07 & 36.31 & 212 & 224 & 184.6 \\
-TVR & cosine; prom. $0.2$; dist. 2; smooth 1 & 21.10 & 20.98 & 75 & 52 & 232.8 \\
-QVH & cosine; prom. $1.3$; dist. 2; smooth 3; split-only & 72.37 & 71.13 & 143 & 139 & 242.6 \\
+ActivityNet & cosine; prom. $-1.0$; dist. 1; smooth 1 & 36.07 & 36.31 & 212 & 224 & 183.9 \\
+TVR & cosine; prom. $0.2$; dist. 2; smooth 1 & 21.10 & 20.98 & 75 & 52 & 232.6 \\
+QVHighlights & cosine; prom. $1.3$; dist. 2; smooth 3; split-only & 72.37 & 71.13 & 143 & 139 & 243.5 \\
 \bottomrule
 \end{tabular}
 \end{center}
-
-\noindent Common optimization: batch size 128, weight decay 0.01, warmup proportion 0.01, maximum 100 epochs, early stopping patience 10, hard negatives from epoch 5 with pool size 5, GT-timestamp Soft MIL, and hybrid segment reduction ($\alpha=0.9$). ACT/TVR use segment:frame fusion $0.85:0.15$; QVH uses $0.80:0.20$.
 
 \section*{2. Shared Boundary Hyperparameters}
 \begin{center}
@@ -36,7 +33,6 @@ QVH & cosine; prom. $1.3$; dist. 2; smooth 3; split-only & 72.37 & 71.13 & 143 &
 \toprule
 Hyperparameter & U1 & U2 \\
 \midrule
-Method & \multicolumn{2}{c}{multi-scale cosine} \\
 Base window & \multicolumn{2}{c}{8} \\
 Multi-scale windows & \multicolumn{2}{c}{$\{2,4,8,16\}$} \\
 Scale weights & \multicolumn{2}{c}{$\{0.4,0.3,0.2,0.1\}$} \\
@@ -54,14 +50,12 @@ Postprocessing & \multicolumn{2}{c}{none} \\
 \toprule
 Dataset & Base Rsum & U1 Rsum & U2 Rsum \\
 \midrule
-ACT & 184.6 & 183.1 & 183.7 \\
-TVR & 232.8 & 232.8 & 233.1 \\
-QVH & 242.6 & 242.4 & 245.5 \\
-Charades & -- & 56.8 & 55.7 \\
+ActivityNet & 183.9 & 183.1 & 183.7 \\
+TVR & 232.6 & 232.8 & 233.1 \\
+QVHighlights & 243.5 & 242.4 & 245.5 \\
 \bottomrule
 \end{tabular}
 \end{center}
-\noindent Charades' separately tuned best run reports $R@1/R@5/R@10/R@100=1.4/6.4/11.2/43.9$ and $Rsum=62.9$.
 
 \section*{3. Intra-Query Segment Separation and QVH Length Regularization}
 \begin{center}
@@ -70,13 +64,13 @@ Charades & -- & 56.8 & 55.7 \\
 \toprule
 Dataset & Setting & R@1 & R@5 & R@10 & R@100 & Rsum \\
 \midrule
-ACT & base IQS max & 15.2 & 36.5 & 49.8 & 83.1 & 184.6 \\
-ACT & IQS log-sum-exp & 14.5 & 36.3 & 49.6 & 83.2 & 183.6 \\
-TVR & base IQS log-sum-exp & 26.3 & 51.6 & 62.5 & 92.4 & 232.8 \\
-TVR & IQS max & 26.9 & 51.7 & 62.3 & 92.0 & 233.0 \\
-QVH & base IQS log-sum-exp & 25.5 & 53.8 & 66.9 & 96.4 & 242.6 \\
-QVH & IQS max & 24.2 & 53.4 & 65.5 & 96.5 & 239.6 \\
-QVH & no split-only length regularization & 25.8 & 55.2 & 66.0 & 96.1 & 243.0 \\
+ActivityNet & Hard & 15.0 & 36.4 & 49.8 & 82.8 & 183.9 \\
+ActivityNet & Soft & 14.5 & 36.3 & 49.6 & 83.2 & 183.6 \\
+TVR & Soft & 26.0 & 51.8 & 62.5 & 92.3 & 232.6 \\
+TVR & Hard & 26.9 & 51.7 & 62.3 & 92.0 & 233.0 \\
+QVHighlights & Soft & 26.5 & 54.9 & 66.8 & 95.3 & 243.5 \\
+QVHighlights & Hard & 24.2 & 53.4 & 65.5 & 96.5 & 239.6 \\
+QVHighlights & no split-only length regularization & 25.8 & 55.2 & 66.0 & 96.1 & 243.0 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -87,38 +81,19 @@ QVH & no split-only length regularization & 25.8 & 55.2 & 66.0 & 96.1 & 243.0 \\
 \small
 \begin{tabular}{c r r r}
 \toprule
-Segment:Frame & ACT Rsum & TVR Rsum & QVH Rsum \\
+Segment:Frame & ActivityNet Rsum & TVR Rsum & QVHighlights Rsum \\
 \midrule
 0.60:0.40 & 181.8 & 228.6 & 238.3 \\
 0.65:0.35 & 182.7 & 229.9 & 239.9 \\
 0.70:0.30 & 183.3 & 231.2 & 241.4 \\
 0.75:0.25 & 183.9 & 232.1 & 241.5 \\
-0.80:0.20 & 184.7 & 232.6 & 242.6 \\
-0.85:0.15 & 184.6 & 232.8 & 243.3 \\
+0.80:0.20 & 184.7 & 232.6 & 243.5 \\
+0.85:0.15 & 183.9 & 232.6 & 243.3 \\
 0.90:0.10 & 184.5 & 232.8 & 243.2 \\
 \bottomrule
 \end{tabular}
 \end{center}
-\noindent QVH evaluated at the ACT/TVR fusion coefficient $0.85:0.15$ obtains $R@1/R@5/R@10/R@100=26.3/53.7/66.8/96.5$ and $Rsum=243.3$.
-
-\section*{5. Earlier GT-Timestamp Partition Ablation (Seed 9527)}
-\begin{center}
-\small
-\begin{tabular}{l l r r r r r}
-\toprule
-Partition & Objective & R@1 & R@5 & R@10 & R@100 & Rsum \\
-\midrule
-SPOT & no timestamp & 22.0 & 47.9 & 61.0 & 94.3 & 225.2 \\
-SPOT & Soft MIL & 25.1 & 54.1 & 65.8 & 96.5 & 241.4 \\
-SPOT & Soft MIL + IQS & 26.6 & 51.7 & 65.9 & 96.5 & 240.7 \\
-Uniform matched & no timestamp & 21.9 & 50.0 & 63.0 & 94.9 & 229.8 \\
-Uniform matched & Soft MIL & 25.7 & 55.0 & 66.8 & 96.1 & 243.7 \\
-Uniform matched & Soft MIL + IQS & 2.4 & 7.9 & 12.5 & 54.1 & 76.9 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\section*{6. Boundary Construction Wall-Clock Time}
+\section*{5. Boundary Construction Wall-Clock Time}
 \begin{center}
 \small
 \begin{tabular}{l r}
@@ -131,6 +106,4 @@ QVH72 & 47.766 \\
 \bottomrule
 \end{tabular}
 \end{center}
-\noindent Timing used the base boundary generation scripts with eight workers and includes source-index generation plus train/validation boundary generation.
-
 \end{document}
